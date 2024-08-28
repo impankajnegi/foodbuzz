@@ -1,9 +1,14 @@
 import Image from 'next/image';
 import classes from './page.module.css';
 import { getMeal } from '@/lib/meals';
+import { notFound } from 'next/navigation';
 
 export default function ({params}){
     const meal = getMeal(params.mealSlug)
+    if(!meal){
+        // show closest not found or error page
+        notFound();
+    }
     return <>
     <header className={classes.header}>
         <dev className={classes.image}>
